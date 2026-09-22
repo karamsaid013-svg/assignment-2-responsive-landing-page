@@ -1,0 +1,128 @@
+/* 1. Design tokens: a limited palette and a 0.25rem-based spacing scale. */
+:root {
+  --paper: #fbfcf8; --white: #ffffff; --ink: #20392f; --muted: #56645b;
+  --green: #2a493d; --lime: #dafa78; --soft: #edf2e8; --line: #d5ded1;
+  --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem;
+  --space-6: 1.5rem; --space-8: 2rem; --space-12: 3rem; --space-16: 4rem; --space-24: 6rem;
+  --radius: 1rem; --content-width: 76rem;
+}
+/* 2. Base: mobile first. No overflow hiding: the layout fits naturally. */
+* { box-sizing: border-box; }
+html { scroll-padding-top: 1.5rem; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; font-size: 1rem; line-height: 1.6; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { line-height: 1.12; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button, a, input { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: .1875rem solid var(--ink); outline-offset: .25rem; }
+a:hover { text-decoration: underline; text-underline-offset: .25rem; }
+section { scroll-margin-top: 1.5rem; }
+/* 3. Page structure: Grid establishes the shared content and full-width tracks. */
+body { display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh; }
+main { display: grid; grid-template-columns: minmax(1rem, 1fr) minmax(0, var(--content-width)) minmax(1rem, 1fr); }
+main > section { grid-column: 2; min-width: 0; }
+main > .benefit-strip, main > .how-section { grid-column: 1 / -1; }
+.wrap { width: calc(100% - 2rem); max-width: var(--content-width); margin-inline: auto; }
+main > .wrap { width: 100%; }
+.section-space { padding-block: var(--space-16); }
+/* 4. Reusable typography, links, and controls. */
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; }
+h1 { font-size: clamp(2.65rem, 6vw, 5rem); font-weight: 500; letter-spacing: -.055em; }
+h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+h2 { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 500; letter-spacing: -.04em; }
+h3 { font-size: 1.25rem; letter-spacing: -.025em; }
+.button { display: inline-flex; justify-content: center; align-items: center; gap: var(--space-6); min-height: 3rem; padding: var(--space-3) var(--space-6); border: 0; border-radius: .4rem; font-size: .9375rem; font-weight: 700; }
+.primary { background: var(--green); color: var(--white); }
+.primary:hover { background: var(--ink); text-decoration: none; }
+.button-group { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-6); }
+.text-link { font-size: .9375rem; font-weight: 700; display: inline-flex; gap: var(--space-3); align-items: center; }
+.small-note { font-size: .875rem; color: var(--muted); }
+.sr-only, .skip-link:not(:focus) { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip-link:focus { position: absolute; z-index: 10; padding: 1rem; background: var(--white); }
+/* 5. Header and navigation: wrapping Flexbox stays usable on narrow screens. */
+.site-header { display: flex; flex-direction: column; gap: var(--space-4); padding-block: var(--space-6); border-bottom: 1px solid var(--line); }
+.brand { display: inline-flex; gap: var(--space-2); align-items: center; font-size: 1.875rem; font-weight: 750; letter-spacing: -.06em; line-height: 1; }
+.brand-mark { width: 1.75rem; height: 1.75rem; background: var(--green); color: var(--lime); display: inline-flex; justify-content: center; align-items: center; border-radius: .375rem; font-size: 1.7rem; }
+.brand-period { margin-left: -.5rem; }
+nav { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); font-size: .875rem; }
+.nav-cta { border: 1px solid var(--line); border-radius: .375rem; padding: .5rem .75rem; font-weight: 700; }
+/* 6. Hero and working product preview. */
+.hero { display: flex; flex-direction: column; gap: var(--space-12); padding-block: var(--space-12); }
+.hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-6); min-width: 0; }
+.lead { max-width: 30rem; color: var(--muted); font-size: 1.125rem; }
+.preview-stage { min-width: 0; width: 100%; padding: var(--space-4); border-radius: var(--radius); background: var(--soft); }
+.planner { padding: var(--space-4); background: var(--white); border: 1px solid var(--line); border-radius: .75rem; box-shadow: 0 .75rem 2rem #20392f0d; }
+.planner-heading, .timer-heading, .priority-heading { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-2); }
+.mini-brand { font-size: 1.125rem; font-weight: 750; letter-spacing: -.06em; }
+.tag, .priority-heading > span { font-size: .75rem; letter-spacing: .06em; color: var(--muted); }
+.planner-intro { padding-block: var(--space-6); }
+.planner-intro .eyebrow { font-size: .75rem; color: var(--muted); margin-bottom: var(--space-2); }
+.planner-intro h2 { font-size: 1.5rem; letter-spacing: -.035em; }
+.planner-intro > p:last-child { font-size: .875rem; color: var(--muted); margin-top: var(--space-2); }
+.timer-panel { background: var(--lime); border-radius: .6rem; padding: var(--space-4); }
+.timer-heading { font-size: .875rem; }
+.session-label { font-size: .75rem; }
+.timer { font-size: clamp(3rem, 10vw, 4.5rem); line-height: 1.3; font-weight: 500; letter-spacing: -.065em; font-variant-numeric: tabular-nums; margin-block: var(--space-3); text-align: center; }
+.timer-actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: var(--space-3); }
+.timer-actions .button { padding-inline: var(--space-4); font-size: .875rem; }
+.reset-button { background: transparent; border: 0; color: var(--ink); text-decoration: underline; padding: .75rem .25rem; font-size: .875rem; }
+.priority-heading { margin-top: var(--space-6); margin-bottom: var(--space-2); }
+.priority-heading h3 { font-size: .9375rem; }
+.task { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); padding-block: var(--space-3); border-bottom: 1px solid var(--line); font-size: .875rem; cursor: pointer; }
+.task input { margin: 0; width: 1.125rem; height: 1.125rem; accent-color: var(--green); flex-shrink: 0; }
+.task input:checked + span { text-decoration: line-through; color: var(--muted); }
+.task-category { color: var(--muted); font-size: .75rem; margin-left: auto; }
+.planner-footer { margin-top: var(--space-4); font-size: .75rem; color: var(--muted); }
+.preview-caption { margin-top: var(--space-4); font-size: .875rem; color: var(--muted); text-align: center; }
+/* 7. Benefits, features, process, closing section, and footer. */
+.benefit-strip { border-block: 1px solid var(--line); }
+.benefit-items { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); padding-block: var(--space-6); color: var(--muted); font-size: .875rem; }
+.benefit-items span::before { content: '✳'; color: var(--green); margin-right: var(--space-3); }
+.section-heading { display: flex; flex-direction: column; gap: var(--space-6); margin-bottom: var(--space-8); }
+.section-heading .eyebrow, .how-intro .eyebrow { margin-bottom: var(--space-4); }
+.section-heading > p { color: var(--muted); }
+.feature-cards { display: flex; flex-direction: column; gap: var(--space-4); }
+.feature-card { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); border: 1px solid var(--line); border-radius: .75rem; padding: var(--space-6); }
+.feature-icon { font-family: Georgia, serif; font-style: italic; font-size: 1.75rem; color: var(--green); margin-bottom: var(--space-4); }
+.feature-card p { color: var(--muted); }
+.feature-label { margin-top: auto; padding-top: var(--space-6); font-size: .75rem; letter-spacing: .09em; font-weight: 700; }
+.how-section { background: var(--green); color: var(--white); padding-block: var(--space-16); }
+.how-content { display: flex; flex-direction: column; gap: var(--space-12); }
+.how-intro { flex: 1; min-width: 0; }
+.how-intro .eyebrow { color: var(--lime); }
+.how-intro > p:not(.eyebrow) { margin-top: var(--space-6); color: #e0e7dd; max-width: 24rem; }
+.how-intro .text-link { margin-top: var(--space-6); color: var(--lime); }
+.steps { flex: 1; display: flex; flex-direction: column; gap: var(--space-8); list-style: none; margin: 0; padding: 0; min-width: 0; }
+.steps li { display: flex; align-items: flex-start; gap: var(--space-4); }
+.step-number { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 2.25rem; height: 2.25rem; border: 1px solid #82968a; border-radius: 50%; color: var(--lime); }
+.steps h3 { margin-top: .375rem; font-size: 1.125rem; }
+.steps p { margin-top: var(--space-2); color: #e0e7dd; }
+.closing { display: flex; flex-direction: column; align-items: center; gap: var(--space-6); text-align: center; }
+.site-footer { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-6); border-top: 1px solid var(--line); padding-block: var(--space-8); font-size: .875rem; color: var(--muted); }
+.site-footer .brand { color: var(--ink); }
+.site-footer > span { font-size: .75rem; }
+/* 8. Progressive enhancement: larger screens build on the mobile layout. */
+@media (min-width: 40rem) {
+  .site-header { flex-direction: row; align-items: center; justify-content: space-between; }
+  nav { gap: var(--space-6); }
+  main { grid-template-columns: minmax(2rem, 1fr) minmax(0, var(--content-width)) minmax(2rem, 1fr); }
+  .wrap { width: calc(100% - 4rem); }
+  .preview-stage { padding: var(--space-8); }
+  .planner { padding: var(--space-6); }
+  .benefit-items { flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
+  .feature-cards { flex-direction: row; flex-wrap: wrap; }
+  .feature-card { flex-basis: 15rem; }
+  .site-footer > span { margin-left: auto; }
+}
+@media (min-width: 64rem) {
+  .hero { flex-direction: row; align-items: center; gap: var(--space-16); padding-block: var(--space-16); }
+  .hero-copy { flex: 1.05; }
+  .preview-stage { flex: 1; }
+  .section-space { padding-block: var(--space-24); }
+  .section-heading { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+  .how-content { flex-direction: row; gap: var(--space-24); }
+  .feature-card { padding: var(--space-8); }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
